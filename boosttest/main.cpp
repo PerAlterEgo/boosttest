@@ -14,9 +14,9 @@
 #include <boost/function.hpp>
 #include <iostream>
 
-int calculatefib(int d1)
+int calculatefib(int n)
 {
-    return d1;
+    return n <= 1 ? 1 : calculatefib(n-1)+calculatefib(n-2);
 }
 
 
@@ -31,13 +31,13 @@ private:
 };
 
 void Worker::operator()() {
-    _function();
+    std::cout << "Thread: " << _function() << std::endl;
 }
 
 
 int main (int argc, const char * argv[])
 {
-    boost::function<int()> f = boost::bind<int>(&calculatefib, 0);
+    boost::function<int()> f = boost::bind<int>(&calculatefib, 12);
     
     Worker worker(f);
     boost::thread worker_thread(worker);
