@@ -38,12 +38,18 @@ void Worker::operator()() {
 int main (int argc, const char * argv[])
 {
     boost::function<int()> f = boost::bind<int>(&calculatefib, 12);
+    boost::packaged_task<int> task(f);
+    boost::unique_future<int> future = task.get_future();
     
     Worker worker(f);
     boost::thread worker_thread(worker);
     
     // insert code here...
     std::cout << "Hello, World!\n";
+    
+    task();
+    
+    int aa = future.get();
     
     worker_thread.join();
     return 0;
