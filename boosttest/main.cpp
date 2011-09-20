@@ -22,12 +22,11 @@ void test1() {
 
 void test2() {
     {
-        jobqueue jobs(2);
-    
-        jobs.add(boost::bind<int>(&calculatefib, 7));
-        jobs.add(boost::bind<int>(&calculatefib, 8));
-        jobs.add(boost::bind<int>(&calculatefib, 12));
-        jobs.add(boost::bind<int>(&calculatefib, 16));
+        jobqueue jobs(8);
+
+        for (int ii=0 ; ii<8 ; ++ii) {
+            jobs.add(boost::bind<int>(&calculatefib, 8+ii));
+        }
     }
 }
 
