@@ -22,18 +22,19 @@ void test1() {
 
 void test2() {
     {
-        jobqueue jobs(3);
+        jobqueue jobs(2);
     
         jobs.add(boost::bind<int>(&calculatefib, 7));
         jobs.add(boost::bind<int>(&calculatefib, 8));
         jobs.add(boost::bind<int>(&calculatefib, 12));
+        jobs.add(boost::bind<int>(&calculatefib, 16));
     }
 }
 
 int main (int argc, const char * argv[])
 {
-    test1();
     test2();
+    test1();
     return 0;
 }
 
