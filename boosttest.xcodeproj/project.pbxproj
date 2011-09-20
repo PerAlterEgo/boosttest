@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CBDFDABB1426993D00EE8310 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CBDFDABA1426993D00EE8310 /* main.cpp */; };
+		CBF2C6C5142867B600321B26 /* fib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CBF2C6C4142867B600321B26 /* fib.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,6 +27,9 @@
 		CBDFDAB61426993D00EE8310 /* boosttest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = boosttest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBDFDABA1426993D00EE8310 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CBDFDABC1426993D00EE8310 /* boosttest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = boosttest.1; sourceTree = "<group>"; };
+		CBF2C6C11428671C00321B26 /* worker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = worker.h; sourceTree = "<group>"; };
+		CBF2C6C31428678C00321B26 /* fib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fib.h; sourceTree = "<group>"; };
+		CBF2C6C4142867B600321B26 /* fib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fib.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,9 @@
 			children = (
 				CBDFDABA1426993D00EE8310 /* main.cpp */,
 				CBDFDABC1426993D00EE8310 /* boosttest.1 */,
+				CBF2C6C11428671C00321B26 /* worker.h */,
+				CBF2C6C31428678C00321B26 /* fib.h */,
+				CBF2C6C4142867B600321B26 /* fib.cpp */,
 			);
 			path = boosttest;
 			sourceTree = "<group>";
@@ -112,6 +119,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBDFDABB1426993D00EE8310 /* main.cpp in Sources */,
+				CBF2C6C5142867B600321B26 /* fib.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
