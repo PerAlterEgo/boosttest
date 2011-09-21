@@ -31,7 +31,9 @@ private:
     
     boost::mutex _job_mutex;
     std::list<func_type> _jobs_todo;
+    
     std::vector<boost::thread*> _threads;
+    
     boost::condition_variable _new_job;
     boost::condition_variable _job_complete;
 

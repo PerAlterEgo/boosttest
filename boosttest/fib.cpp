@@ -11,11 +11,6 @@ boost::mutex m_mutex;
 
 int calculatefib(int n)
 {
-    //boost::this_thread::sleep(boost::posix_time::milliseconds(10)); 
-    {    
-        //boost::mutex::scoped_lock l(m_mutex);
-        //std::cout << boost::this_thread::get_id() << ": fib(" << n << ")" << std::endl;
-    }
     return n <= 1 ? 1 : calculatefib(n-1)+calculatefib(n-2);
 }
 

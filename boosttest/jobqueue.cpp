@@ -11,13 +11,6 @@
 
 #include <assert.h>
 
-boost::mutex log_mutex;
-
-inline void log(const std::string& str) {
-    //boost::mutex::scoped_lock lock(log_mutex);
-    //std::cout << boost::this_thread::get_id() << " " << str << std::endl;
-}
-
 jobqueue::jobqueue(size_t nr_threads) : _counter(0), _shutting_down(false) {
     boost::mutex::scoped_lock lk(_job_mutex);
     _threads.resize(nr_threads);
@@ -30,18 +23,15 @@ jobqueue::jobqueue(size_t nr_threads) : _counter(0), _shutting_down(false) {
 jobqueue::~jobqueue() {
     wait_until_done();
     
-    log ("Joining threads");
-    
     for (size_t ii=0 ; ii<_threads.size() ; ++ii) {
         _threads[ii]->join();
         delete _threads[ii];
     }
-    log ("Threads joined");
+
 }
 
 void jobqueue::wait_until_done() {
     
-    log("wait_until_done...");
     boost::mutex::scoped_lock lock(_job_mutex);
     
     if (_jobs_todo.size() > 0) {
@@ -49,8 +39,6 @@ void jobqueue::wait_until_done() {
     }
     
     _shutting_down = true;
-    
-    log("job count at zero, waking threads!");
     
     // Wake up all threads
     _new_job.notify_all();
@@ -60,6 +48,7 @@ void jobqueue::wait_until_done() {
 void jobqueue::add(func_type f) {
     boost::mutex::scoped_lock lk(_job_mutex);
     _jobs_todo.push_back(f);
+    lk.unlock();
     _new_job.notify_one(); 
 }
 
@@ -81,7 +70,6 @@ void jobqueue::process() {
         
         assert (_counter == 0);
         
-        log("wait...");
         _new_job.wait(lock, boost::bind(&jobqueue::has_changed_state, this));
         
         if (is_active()) {
@@ -96,14 +84,11 @@ void jobqueue::process() {
             
             lock.unlock();
             
-            log("Unlock, proc");
             fun();
             
             _job_complete.notify_one();
             
-            log("   done!");
         }
     }
-    log("Shutting down");
 }
 
