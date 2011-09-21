@@ -20,19 +20,22 @@ void test1() {
     std::cout << "Done, sum=" << sum << std::endl;
 }
 
-void test2() {
+void test2(int nr_threads, int nr_jobs) {
     {
-        jobqueue jobs(8);
+        jobqueue jobs(nr_threads);
 
-        for (int ii=0 ; ii<16 ; ++ii) {
-            jobs.add(boost::bind<int>(&calculatefib, 40));
+        for (int ii=0 ; ii<nr_jobs*100 ; ++ii) {
+            jobs.add(boost::bind<int>(&calculatefib, 30));
         }
     }
 }
 
 int main (int argc, const char * argv[])
 {
-    test2();
+    int nr_threads = argc > 1 ? atoi(argv[1]) : 4;
+    int nr_jobs =  argc > 2 ? atoi(argv[2]) : 16;
+    
+    test2(nr_threads, nr_jobs);
     //test1();
     return 0;
 }

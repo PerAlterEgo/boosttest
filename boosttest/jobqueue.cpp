@@ -13,9 +13,9 @@
 
 boost::mutex log_mutex;
 
-void log(const std::string& str) {
-    boost::mutex::scoped_lock lock(log_mutex);
-    std::cout << boost::this_thread::get_id() << " " << str << std::endl;
+inline void log(const std::string& str) {
+    //boost::mutex::scoped_lock lock(log_mutex);
+    //std::cout << boost::this_thread::get_id() << " " << str << std::endl;
 }
 
 jobqueue::jobqueue(size_t nr_threads) : _counter(0), _shutting_down(false) {
